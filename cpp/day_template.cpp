@@ -22,17 +22,22 @@ auto read_input() {
 
 
 
-void part1() {
+auto part1() {
 
 }
 
 
-void part2() {
+auto part2() {
 
 }
 
 
 int main() {
-    part1();
-    part2();
+    auto p1 = part1();
+    cout << "Part 1: " << p1 << endl;
+
+    cout << ('--------------') << endl;
+
+    auto p2 = part2();
+    cout << "Part 2: " << p2 << endl;
 }

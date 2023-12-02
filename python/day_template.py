@@ -18,8 +18,8 @@ def solution2():
     
     
 if __name__ == '__main__':
-    print(solution1())
+    print("Part 1:", solution1())
     
     print('--------------')
     
-    print(solution2())
+    print("Part 2: ", solution2())
