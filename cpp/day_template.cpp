@@ -24,11 +24,15 @@ auto read_input() {
 
 auto part1() {
 
+
+    return 1;
 }
 
 
 auto part2() {
 
+
+    return 2;
 }
 
 
@@ -36,7 +40,7 @@ int main() {
     auto p1 = part1();
     cout << "Part 1: " << p1 << endl;
 
-    cout << ('--------------') << endl;
+    cout << "--------------" << endl;
 
     auto p2 = part2();
     cout << "Part 2: " << p2 << endl;
