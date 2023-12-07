@@ -2,6 +2,7 @@
 # https://adventofcode.com/2023/day/
 
 from util.input_util import read_input_file
+from collections import deque, defaultdict
 
 def parse_lines():
     lines = read_input_file(0)
