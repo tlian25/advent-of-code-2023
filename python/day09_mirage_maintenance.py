@@ -28,21 +28,19 @@ def generate_diffs(history:deque[int]) -> deque[int]:
 
 
 def derive_value_right(history:deque[int]) -> bool:
-    stack = [history]
-    while not is_all_zero(stack[-1]):
-        curr = stack[-1]
-        diffs = generate_diffs(curr)
-        stack.append(diffs)
+    curr = history
+    stack = [curr[-1]]
+    while not is_all_zero(curr):
+        curr = generate_diffs(curr)
+        stack.append(curr[-1])
     
     # walk back up stack
-    val = None
     while len(stack) > 1:
         diff = stack.pop()
         # extrapolate last value
-        val = stack[-1][-1] + diff[-1]
-        stack[-1].append(val)
+        stack[-1] += diff
     
-    return val
+    return stack[0] 
 
 
 def solution1():
@@ -56,21 +54,19 @@ def solution1():
     return res
     
 def derive_value_left(history:deque[int]) -> bool:
-    stack = [history]
-    while not is_all_zero(stack[-1]):
-        curr = stack[-1]
-        diffs = generate_diffs(curr)
-        stack.append(diffs)
+    curr = history
+    stack = [curr[0]]
+    while not is_all_zero(curr):
+        curr = generate_diffs(curr)
+        stack.append(curr[0])
     
     # walk back up stack
-    val = None
     while len(stack) > 1:
         diff = stack.pop()
         # extrapolate last value
-        val = stack[-1][0] - diff[0]
-        stack[-1].appendleft(val)
+        stack[-1] -= diff
     
-    return val
+    return stack[0] 
 
 
 def solution2():
@@ -84,8 +80,12 @@ def solution2():
 
 
 if __name__ == '__main__':
-    print("Part 1:", solution1())
+    s = solution1()
+    print("Part 1:", s) 
+    assert s == 1987402313, s
     
     print('--------------')
     
-    print("Part 2: ", solution2())
+    s = solution2()
+    print("Part 2: ", s)
+    assert s == 900, s
