@@ -33,11 +33,8 @@ def match(p, symbol):
 
 
 def possible_ways(pattern:str, record:list):
-    # Need to implement some sort of Dynamic programming
     L = len(pattern)
-
     REMAIN = L - sum(record)
-    # DFS_CACHE = {}
     
     @cache
     def dfs(i, remain, l):
@@ -54,7 +51,6 @@ def possible_ways(pattern:str, record:list):
             return 0
         
         l += record[i]
-
         if i == len(record)-1: # last record used
             if match(pattern[l:], OPERATIONAL):
                 return 1
@@ -65,7 +61,6 @@ def possible_ways(pattern:str, record:list):
             if pattern[l+r-1] == DAMAGED:
                 break
             w += dfs(i+1, remain - r, l + r)
-
         return w
     
     # front prefix for all possible fillers
@@ -79,24 +74,6 @@ def possible_ways(pattern:str, record:list):
     return ways
 
 
-def possible_ways2(pattern, record):
-    # In-place DFS
-    L = len(pattern)
-    REMAIN = L - sum(record)
-    DFS_CACHE = {}
-
-    stack = []
-    for r in range(REMAIN+1):
-        if r == 0 or pattern[r-1] != DAMAGED:
-            stack.append((0, REMAIN-r, r))
-
-
-    
-    
-    
-    
-        
-
 def unfold(pattern, record, n):
     pattern = (pattern + [WILDCARD]) * (n-1) + pattern
     record *= n
@@ -105,7 +82,6 @@ def unfold(pattern, record, n):
 
 def solution1():
     patterns, records = parse_lines()
-    
     totalways = 0
     for p, r in zip(patterns, records):
         ways = possible_ways(''.join(p), r)
@@ -117,18 +93,14 @@ def solution1():
     
 def solution2():
     patterns, records = parse_lines()
-    
     totalways = 0
     n = 5
-    i = 0
     for p, r in zip(patterns, records):
         p, r = unfold(p, r, n)
         ways = possible_ways(''.join(p), r)
         totalways += ways
-        i += 1
-        
+
     return totalways
-    
     
     
 if __name__ == '__main__':
