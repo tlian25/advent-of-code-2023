@@ -30,10 +30,10 @@ def turn_right(currdir):
 
 def bfs(grid, minstep, maxstep):
     NR, NC = len(grid), len(grid[0])
-    dp = defaultdict(int)
-    dp[(0, 0, E, 0)] = 0
+    dp = {} # track min heatloss at each step/state
+    dp[(0, 0, E, 0)] = 0 # row, col, direction, steps
 
-    q = [(0, 0, 0, E, 0)]
+    q = [(0, 0, 0, E, 0)] # heatloss, row, col, direction, steps
     while q:
         h, r, c, d, s = heappop(q)
         print('\r', r, c, d, s, h, end='')
@@ -41,7 +41,8 @@ def bfs(grid, minstep, maxstep):
         if r == NR-1 and c == NC-1:
             continue
 
-        if s < maxstep: # can continue in same direction
+        # can continue in same direction
+        if s < maxstep: 
             dr, dc = DIR[d]
             nr, nc = r+dr, c+dc
             if 0 <= nr < NR and 0 <= nc < NC:
