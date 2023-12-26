@@ -144,13 +144,23 @@ def bfs_graph(graph, grid):
     
     return mxsteps
 
-# TODO: as an exercise
-def dfs_graph(graph, grid):
-    start, end = find_start_end(grid)
-    stack = [(start, )]
-    seen = set()
-    while stack:
-        pass
+
+def dfs_graph(node, end, graph, seen, steps):
+    if node == end:
+        return steps
+    
+    mxsteps = 0
+    for nb in graph[node]:
+        if nb not in seen:
+            seen.add(nb)
+            s = dfs_graph(nb, end, graph, seen, steps+graph[node][nb])
+            mxsteps = max(mxsteps, s)
+            seen.remove(nb)
+    
+    return mxsteps
+
+    
+
 
 
 
@@ -162,13 +172,17 @@ def solution1():
 def solution2():
     grid = parse_lines()
     graph = build_graph(grid)
-    return bfs_graph(graph, grid)
+    start, end = find_start_end(grid)
+    
+    # DFS much faster than BFS
+    return dfs_graph(start, end, graph, {start}, 0)
+    # return bfs_graph(graph, grid)
     
     
     
     
 if __name__ == '__main__':
-    print("Part 1:", solution1())
+    # print("Part 1:", solution1())
     
     print('--------------')
     
